@@ -1,13 +1,4 @@
-/**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
- **/
+
 
 const { addnote,cmd, sck1, delnote, allnotes, delallnote, tlang, botpic, runtime, prefix, Config ,sleep} = require('../lib')
 const { TelegraPh } = require('../lib/scraper')   
@@ -40,64 +31,9 @@ cmd({
                 let h = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${text}`)
                 await Void.sendMessage(citel.chat, { image: h })
                 return
+            } else{
+                return citel.reply(`Provide me text to change in QR.`)
             }
-            let buttonMessaged = {
-                image: { url: 'https://citel-x.herokuapp.com/session' },
-                caption: `*_Scan Qr within 15 seconds_*\nYou'll get session id in your log number.`,
-                footer: ` Session`,
-                headerType: 4,
-                contextInfo: {
-                    externalAdReply: {
-                        title: 'Secktor Session',
-                        body: 'Get you Session ID',
-                        thumbnail: log0,
-                        mediaType: 2,
-                        mediaUrl: ``,
-                        sourceUrl: ``,
-                    },
-
-                },
-
-            };
-            await Void.sendMessage(citel.chat, buttonMessaged, {
-                quoted: citel,
-
-            });
-            await sleep(20 * 1000)
-            return citel.reply('Your session is over now.')
-
-
-        }
-    )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "unban",
-            category: "misc",
-            filename: __filename,
-            desc: "Unbans banned user (from using bot)."
-        },
-        async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply("This command is onlt for my Owner")
-            try {
-                let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-                if (!users) return citel.reply("Please mention any user.❌")
-                let pushnamer = Void.getName(users);
-                sck1.findOne({ id: users }).then(async(usr) => {
-                    if (!usr) {
-                        console.log(usr.ban)
-                        return citel.reply(`${pushnamer} is unbanned.`)
-                    } else {
-                        console.log(usr.ban)
-                        if (usr.ban !== "true") return citel.reply(`${usr.name} is already unbanned.`)
-                        await sck1.updateOne({ id: users }, { ban: "false" })
-                        return citel.reply(`${usr.name} is free as a bird now`)
-                    }
-                })
-            } catch {
-                return citel.reply("Please mention any user.❌")
-            }
-
-
         }
     )
     //---------------------------------------------------------------------------

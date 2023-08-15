@@ -3,26 +3,24 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 
 //═══════[Required Variables]════════\\
-global.owner = process.env.OWNER_NUMBER.split(",")
+global.owner = process.env.OWNER_NUMBER === undefined ? '918639650925'.split(",") : process.env.OWNER_NUMBER
 global.mongodb = process.env.MONGODB_URI || "mongodb+srv://sam:sam@cluster0.u1smxsv.mongodb.net/?retryWrites=true&w=majority"
 global.port= process.env.PORT || 5000
-global.email = 'sam@secktor.live'
-global.github = 'https://github.com/SamPandey001/Secktor-Md'
-global.location = 'Sultanpur IN'
-global.gurl = 'https://instagram.com/' // add your username
-global.sudo = process.env.SUDO || '919628516236'
-global.devs = '919628516236';
-global.website = 'https://github.com/SamPandey001/Secktor-Md' //wa.me/+91000000000000
-global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://raw.githubusercontent.com/SecktorBot/Brandimages/main/logos/SocialLogo%201.png'
+global.email = 'hi@decentparadox.tech'
+global.github = 'https://github.com/decentparadox/Falcogram'
+global.location = 'Bangalore IN'
+global.gurl = 'https://instagram.com/decentparadox' // add your username
+global.website = 'https://decentparadox.tech' //wa.me/+91000000000000
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'put url here' // hey sam you here?
 module.exports = {
-  botname:   process.env.BOT_NAME === undefined ? '𝐒𝐞𝐜𝐤𝐭𝐨𝐫 𝐁𝐨𝐭𝐭𝐨' : process.env.BOT_NAME,
-  ownername: process.env.OWNER_NAME === undefined ? 'SamPandey001' : process.env.OWNER_NAME,
-  sessionName:  process.env.SESSION_ID === undefined ? false : process.env.SESSION_ID,
-  author:  process.env.PACK_INFO.split(";")[0] === undefined ? 'SamPandey001' : process.env.PACK_INFO.split(";")[0],
+  botname:   process.env.BOT_NAME === undefined ? 'Falcogram' : process.env.BOT_NAME,
+  ownername: process.env.OWNER_NAME === undefined ? 'Sasank' : process.env.OWNER_NAME,
+  sessionName:  process.env.SESSION_ID === undefined ? 'TangibleBeatles' : process.env.SESSION_ID,
+  author:  process.env.PACK_INFO.split(";")[0] === undefined ? 'Sasank' : process.env.PACK_INFO.split(";")[0],
   auto_read_status :  process.env.AUTO_READ_STATUS === undefined ? false : process.env.AUTO_READ_STATUS,
-  packname:  process.env.PACK_INFO.split(";")[1] === undefined ? 'Secktor-Md' : process.env.PACK_INFO.split(";")[1],
+  packname:  process.env.PACK_INFO.split(";")[1] === undefined ? 'Bot' : process.env.PACK_INFO.split(";")[1],
   autoreaction:  process.env.AUTO_REACTION  === undefined ? false : process.env.AUTO_REACTION ,
-  antibadword :  process.env.ANTI_BAD_WORD === undefined ? 'nbwoed' : process.env.ANTI_BAD_WORD,
+  antibadword :  process.env.ANTI_BAD_WORD === undefined ? 'nobadworddd' : process.env.ANTI_BAD_WORD,
   alwaysonline:  process.env.ALWAYS_ONLINE === undefined ? false : process.env.ALWAYS_ONLINE,
   antifake : process.env.FAKE_COUNTRY_CODE === undefined ? '971' : process.env.FAKE_COUNTRY_CODE,
   readmessage:  process.env.READ_MESSAGE === undefined ? false : process.env.READ_MESSAGE,
@@ -38,13 +36,8 @@ module.exports = {
   autobio:  process.env.AUTO_BIO === undefined ? false : process.env.AUTO_BIO,
   OPENAI_API_KEY:  process.env.OPENAI_API_KEY === undefined ? false : process.env.OPENAI_API_KEY,
   heroku:  process.env.heroku === undefined ? false : process.env.heroku,
-  HEROKU: {
-    HEROKU: process.env.HEROKU ||false,
-    API_KEY: process.env.HEROKU_API_KEY === undefined ? '1abfce1e-1bee-4334-9f6c-f4c1cb1cafab' : process.env.HEROKU_API_KEY,
-    APP_NAME: process.env.HEROKU_APP_NAME === undefined ? 'zeropgg' : process.env.HEROKU_APP_NAME
-},
   VERSION: process.env.VERSION === undefined ? 'v.0.0.3' : process.env.VERSION,
-  LANG: process.env.THEME|| 'SECKTOR',
+  LANG: process.env.THEME|| 'EN',
   WORKTYPE: process.env.WORKTYPE === undefined ? 'public' : process.env.WORKTYPE
 };
 

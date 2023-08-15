@@ -1,13 +1,3 @@
-/**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
- **/
 
  const { tlang, getAdmin, prefix, Config, sck, fetchJson, runtime,cmd,getBuffer } = require('../lib')
  let { dBinary, eBinary } = require("../lib/binary");
@@ -51,58 +41,6 @@ async(Void, citel, text,{ isCreator }) => {
             }      
 }
 )
- //---------------------------------------------------------------------------
- cmd({
-             pattern: "attp",
-             desc: "Makes glowing sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/attp/${text}`)
- return citel.reply(a,{packname:'Secktor',author:'ATTP'},"sticker") 
-         }
-     )
- cmd({
-             pattern: "ttp",
-             desc: "Makes static sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
- return citel.reply(a,{packname:'Secktor',author:'TTP'},"sticker") 
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "exec",
-             desc: "Evaluates quoted code with given language.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             try {
-                 const code = {
-                     script: citel.quoted.text,
-                     language: text[1],
-                     versionIndex: "0",
-                     stdin: text.slice(2).join(" "),
-                     clientId: '694805244d4f825fc02a9d6260a54a99',
-                     clientSecret: '741b8b6a57446508285bb5893f106df3e20f1226fa3858a1f2aba813799d4734'
-                 };
-                 request({
-                     url: "https://api.jdoodle.com/v1/execute",
-                     method: "POST",
-                     json: code
-                 }, function(_error, _response, body) {
-                    return citel.reply("> " + text[1] + "\n\n" + "```" + body.output + "```");
-                 });
-             } catch (error) {
-                 console.log(error);
-             }
-         }
-     )
      //---------------------------------------------------------------------------
  cmd({
              pattern: "readmore",
@@ -165,19 +103,6 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "wm",
-             desc: "Makes wa.me of quoted or mentioned user.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             let users = citel.mentionedJid ? citel.mentionedJid[0].split('@')[0] : citel.quoted ? citel.quoted.sender.split('@')[0] : text.replace('@')[0]
-            return citel.reply(`https://wa.me/${users}`)
- 
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
              pattern: "pick",
              desc: "Pics random user from Group",
              category: "misc",
@@ -230,61 +155,6 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
  
          }
      )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "mp4fromurl",
-             desc: "download mp4 from url.",
-             category: "misc",
-             use: '<url>',
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             if (!text) return citel.reply(`Where's the link ?`);
-             Void.sendMessage(citel.chat, {
-                 video: {
-                     url: text.split(" ")[0],
-                 },
-                 caption: "*HERE WE GO*",
-                 contextInfo: {
-                     externalAdReply: {
-                         title: tlang().title,
-                         body: `${citel.pushName}`,
-                         thumbnail: log0,
-                         mediaType: 2,
-                         mediaUrl: ``,
-                         sourceUrl: ``,
-                     },
-                 },
-             }, {
-                 quoted: citel,
-             });
- 
-         }
-     )
-     //---------------------------------------------------------------------------
- 
- cmd({
-             pattern: "emix",
-             desc: "Mixes two emojies.",
-             category: "misc",
-             use: '<query>',
-             filename: __filename,
-         },
-         async(Void, citel, text,{ isCreator }) => {
-             if (!text) return citel.reply(`Example : ${prefix}emix 😅,🤔`);
-             let [emoji1, emoji2] = text.split `,`;
-             let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1 )}_${encodeURIComponent(emoji2)}`);
-             for (let res of anu.results) {
-                 let encmedia = await Void.sendImageAsSticker(citel.chat, res.url, citel, {
-                     packname: global.packname,
-                     author: global.author,
-                     categories: res.tags,
-                 });
-                 await fs.unlinkSync(encmedia);
-             }
-         }
-     )
-     //---------------------------------------------------------------------------
  cmd({
              pattern: "chatbot",
              desc: "activates and deactivates chatbot.\nuse buttons to toggle.",
@@ -480,25 +350,7 @@ let buttons = [{
              await Void.sendButtonText(citel.chat, buttons, `Activate antilink:Deletes Link + kick`, Void.user.name, citel);
          }
      )
-     cmd({
-        pattern: 'ss',
-        alias :['webss' , 'fullss'],
-        category: "search",
-        desc: "Provides screenshot of given url",
-        use: '<text>',
-        filename: __filename,
-    },
-    async(Void, citel, text) => {
-let limit = 5;
-try {
-if (!text) return citel.reply("```Uhh Please, Give me Url!```");
-let urll = `https://s.vercel.app/api?url=${text.match(/\bhttps?:\/\/\S+/gi)[0]}&width=1280&height=720`
-let media  = await getBuffer(urll)
-return await Void.sendMessage(citel.chat ,{image : media } , {quoted:citel} )
-}
-catch (err) { return citel.reply("```Error While Fetching Snapshot```")}
-    }
-)
+
 
 
      //---------------------------------------------------------------------------

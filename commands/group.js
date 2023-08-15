@@ -1,13 +1,3 @@
-/**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
- **/
 
 const { sck, sck1,cmd, jsonformat, botpic, TelegraPh, RandomXP, Config, tlang, warndb, sleep,getAdmin,getBuffer, prefix } = require('../lib')
 const moment = require("moment-timezone");
@@ -80,22 +70,7 @@ cmd({
             }
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-        pattern: "support",
-        desc: "Sends official support group link.",
-        category: "group",
-        filename: __filename,
-    },
-    async(Void, citel, text) => {
-        citel.reply(`*Check your Pm ${tlang().greet}*`);
-        await Void.sendMessage(`${citel.sender}`, {
-            image: log0,
-            caption: `*Group Name: Secktor-Support*\n*Group Link:* https://chat.whatsapp.com/Bl2F9UTVU4CBfZU6eVnrbC`,
-        });
 
-    }
-)
 
 //---------------------------------------------------------------------------
 cmd({
@@ -132,25 +107,6 @@ cmd({
                 .catch((err) => console.log(jsonformat(err)));
         }
     )
-    //---------------------------------------------------------------------------
-    cmd({
-        pattern: "ujid",
-        desc: "get jid of all user in a group.",
-        category: "owner",
-        filename: __filename,
-    },
-    async(Void, citel, text,{ isCreator }) => {
-        if(!isCreator) return citel.reply(tlang().owner)
-        const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
-		const participants = citel.isGroup ? await groupMetadata.participants : "";
-    let textt = `_Here is jid address of all users of_\n *- ${groupMetadata.subject}*\n\n`
-    for (let mem of participants) {
-            textt += `📍 ${mem.id}\n`;
-        }
-      citel.reply(textt)
-
-    }
-)
 
     //---------------------------------------------------------------------------
 cmd({
@@ -729,35 +685,7 @@ cmd({
 
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "getjids",
-            desc: "Sends chat id of every groups.",
-            category: "group",
-            filename: __filename,
-        },
-        async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply(tlang().owner)
-            let getGroups = await Void.groupFetchAllParticipating();
-            let groups = Object.entries(getGroups)
-                .slice(0)
-                .map((entry) => entry[1]);
-            let anu = groups.map((v) => v.id);
-            let jackhuh = `All groups jid\n\n`
-            citel.reply(`Fetching jid from ${anu.length} Groups`)
-            for (let i of anu) {
-                let metadata = await Void.groupMetadata(i);
-                await sleep(500)
-                jackhuh += `*Subject:-* ${metadata.subject}\n`
-                jackhuh += `*Member :* ${metadata.participants.length}\n`
-                jackhuh += `*Jid:-* ${i}\n\n`
 
-            }
-            citel.reply(jackhuh)
-
-        }
-    )
-    //---------------------------------------------------------------------------
 cmd({
         pattern: "demote",
         desc: "Demotes replied/quoted user from group",
